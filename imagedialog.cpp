@@ -57,7 +57,22 @@ void ImageDialog::addImageClicked()
 
 void ImageDialog::addTagClicked()
 {
+    bool ok;
+    QString tag = QInputDialog::getText(this, tr("Image Book"), tr("Tag:"),
+                                        QLineEdit::Normal, QString(), &ok);
 
+    if (ok) {
+        tag = tag.toLower();
+        QRegExp regExpr("[a-z]+");
+        if (regExpr.exactMatch(tag)) {
+            QMessageBox::warning(this, tr("Image Book"),
+                                 tr("This is not valid tag. "
+                                 "Tags consists of lower case characters a-z."));
+            return;
+        }
+        images.addTag(imageIds[currentImage], tag);
+        updateTags();
+    }
 }
 
 QStringList ImageDialog::selectedTags()
