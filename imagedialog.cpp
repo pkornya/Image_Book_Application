@@ -6,9 +6,76 @@ ImageDialog::ImageDialog(QWidget *parent) :
     ui(new Ui::ImageDialog)
 {
     ui->setupUi(this);
+
+    currentImage = -1;
+
+    updateTags();
+    updateImages();
+
+    connect(ui->previousButton, SIGNAL(clicked(bool)),
+            this, SLOT(previousClicked()));
+    connect(ui->nextButton, SIGNAL(clicked(bool)),
+            this, SLOT(nextClicked()));
+    connect(ui->addTagButton, SIGNAL(clicked(bool)),
+            this, SLOT(addTagClicked()));
+    connect(ui->addImageButton, SIGNAL(clicked(bool)),
+            this, SLOT(addImageClicked()));
+    connect(ui->tagList, SIGNAL(itemSelectionChanged()),
+            this, SLOT(tagsChanged()));
+
 }
 
 ImageDialog::~ImageDialog()
 {
     delete ui;
+}
+
+void ImageDialog::nextClicked()
+{
+    currentImage = (currentImage + 1) % imageIds.count();
+    updateCurrentImage();
+}
+
+void ImageDialog::previousClicked()
+{
+    currentImage--;
+    if (currentImage == -1)
+        currentImage = imageIds.count() - 1;
+
+    updateCurrentImage();
+}
+
+void ImageDialog::tagsChanged()
+{
+
+}
+
+void ImageDialog::addImageClicked()
+{
+
+}
+
+void ImageDialog::addTagClicked()
+{
+
+}
+
+QStringList ImageDialog::selectedTags()
+{
+
+}
+
+void ImageDialog::updateImages()
+{
+
+}
+
+void ImageDialog::updateTags()
+{
+
+}
+
+void ImageDialog::updateCurrentImage()
+{
+
 }
