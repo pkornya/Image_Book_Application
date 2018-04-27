@@ -47,7 +47,7 @@ void ImageDialog::previousClicked()
 
 void ImageDialog::tagsChanged()
 {
-
+    updateImages();
 }
 
 void ImageDialog::addImageClicked()
