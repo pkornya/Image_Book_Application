@@ -29,7 +29,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -40,7 +40,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="tagList">
       <property name="selectionMode">
        <enum>QAbstractItemView::MultiSelection</enum>
       </property>
@@ -69,7 +69,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -122,16 +122,9 @@
     </item>
    </layout>
   </widget>
-  <zorder>previousButton</zorder>
-  <zorder>nextButton</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>addTagButton</zorder>
-  <zorder>addImageButton</zorder>
-  <zorder>listWidget</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
   <zorder>imageLabel</zorder>
-  <zorder>imagesLabel</zorder>
-  <zorder>label</zorder>
-  <zorder>listWidget</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

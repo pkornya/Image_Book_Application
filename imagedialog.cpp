@@ -1,3 +1,7 @@
+#include <QInputDialog>
+#include <QFileDialog>
+#include <QMessageBox>
+
 #include "imagedialog.h"
 #include "ui_imagedialog.h"
 
@@ -52,7 +56,21 @@ void ImageDialog::tagsChanged()
 
 void ImageDialog::addImageClicked()
 {
+    QString fileName = QFileDialog::getOpenFileName(
+                       this, tr("Open file"), QString(),
+                       tr("PNG Images (*.png)"));
+    if (!fileName.isNull()) {
+        QImage image(fileName);
+        if (image.isNull()) {
+            QMessageBox::warning(this, tr("Image Book"),
+                                 tr("Failed to open the file '%1'")
+                                 .arg(fileName));
+            return;
+        }
 
+        images.addImage(image, selectedTags());
+        updateImages();
+    }
 }
 
 void ImageDialog::addTagClicked()
