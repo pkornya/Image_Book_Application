@@ -95,7 +95,10 @@ void ImageDialog::addTagClicked()
 
 QStringList ImageDialog::selectedTags()
 {
-
+    QStringList result;
+    foreach(QListWidgetItem *item, ui->tagList->selectedItems())
+        result << item->text();
+    return result;
 }
 
 void ImageDialog::updateImages()
