@@ -26,7 +26,6 @@ ImageDialog::ImageDialog(QWidget *parent) :
             this, SLOT(addImageClicked()));
     connect(ui->tagList, SIGNAL(itemSelectionChanged()),
             this, SLOT(tagsChanged()));
-
 }
 
 ImageDialog::~ImageDialog()
@@ -103,7 +102,20 @@ QStringList ImageDialog::selectedTags()
 
 void ImageDialog::updateImages()
 {
+    int id;
+    if (currentImage != -1)
+        id = imageIds[currentImage];
+    else
+        id = -1;
 
+    imageIds = images.getIds(selectedTags());
+    currentImage = imageIds.indexOf(id);
+    if (currentImage == -1 && !imageIds.isEmpty())
+        currentImage = 0;
+
+    ui->imageLabel->setText(QString::number(imageIds.count()));
+
+    updateCurrentImage();
 }
 
 void ImageDialog::updateTags()
