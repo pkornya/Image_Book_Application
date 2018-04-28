@@ -133,5 +133,19 @@ void ImageDialog::updateTags()
 
 void ImageDialog::updateCurrentImage()
 {
+    if (currentImage == -1) {
+        ui->imageLabel->setPixmap(QPixmap());
+        ui->imageLabel->setText(tr("No image"));
 
+        ui->addTagButton->setEnabled(false);
+        ui->nextButton->setEnabled(false);
+        ui->previousButton->setEnabled(false);
+    }
+    else {
+        ui->imageLabel->setPixmap(QPixmap::fromImage(images.getImage(imageIds[currentImage])));
+        ui->imageLabel->clear();
+        ui->addTagButton->setEnabled(true);
+        ui->nextButton->setEnabled(true);
+        ui->previousButton->setEnabled(true);
+    }
 }
