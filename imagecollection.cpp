@@ -40,7 +40,16 @@ QList<int> ImageCollection::getIds(QStringList tags)
 
 QStringList ImageCollection::getTags()
 {
+    QSqlQuery qry;
+    qry.prepare("SELECT DISTINCT tag FROM tags");
+    if(!qry.exec())
+        qFatal("Failed to get tags");
 
+    QStringList result;
+    while (qry.next())
+        result << qry.value(0).toString();
+
+    return result;
 }
 
 void ImageCollection::addTag(int id, QString tag)
