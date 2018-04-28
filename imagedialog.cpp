@@ -108,7 +108,15 @@ void ImageDialog::updateImages()
 
 void ImageDialog::updateTags()
 {
+    QStringList selection = selectedTags();
 
+    QStringList tags = images.getTags();
+    ui.tagList->clear();
+    ui.tagList->addItems(tags);
+
+    for(int i = 0; i < ui.tagList->count(); ++i)
+        if(selection.contains(ui.tagList->item(i)->text()))
+            ui.tagList->item(i)->setSelected(true);
 }
 
 void ImageDialog::updateCurrentImage()
