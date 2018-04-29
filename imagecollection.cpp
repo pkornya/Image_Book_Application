@@ -54,7 +54,13 @@ QStringList ImageCollection::getTags()
 
 void ImageCollection::addTag(int id, QString tag)
 {
+    QSqlQuery qry;
 
+    qry.prepare("INSERT INTO tags (id, tag) VALUES (:id, :tag)");
+    qry.bindValue(":id", id);
+    qry.bindValue(":tag", tag);
+    if(!qry.exec())
+        qFatal("Failed to add tag");
 }
 
 void ImageCollection::addImage(QImage image, QStringList tags)
