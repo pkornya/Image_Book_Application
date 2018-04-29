@@ -35,7 +35,21 @@ QImage ImageCollection::getImage(int id)
 
 QList<int> ImageCollection::getIds(QStringList tags)
 {
+    QSqlQuery qry;
 
+    if (tags.count() == 0)
+        qry.prepare("SELECT images.id FROM images");
+    else
+        qry.prepare("SELECT id FROM tags WHERE tag IN ('" +
+                     tags.join("','") + "') GROUP BY id");
+    if(!qry.exec())
+        qFatal("Failed to get IDs");
+
+    QList<int> result;
+    while(qry.next())
+        result << qry.value(0).toInt();
+
+    return result;
 }
 
 QStringList ImageCollection::getTags()
