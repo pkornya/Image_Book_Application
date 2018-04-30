@@ -1,9 +1,9 @@
+#include "imagedialog.h"
+#include "ui_imagedialog.h"
+
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QMessageBox>
-
-#include "imagedialog.h"
-#include "ui_imagedialog.h"
 
 ImageDialog::ImageDialog(QWidget *parent) :
     QDialog(parent),

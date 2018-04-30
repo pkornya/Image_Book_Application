@@ -1,9 +1,9 @@
 #ifndef IMAGEDIALOG_H
 #define IMAGEDIALOG_H
 
-#include <QDialog>
-
 #include "imagecollection.h"
+
+#include <QDialog>
 
 namespace Ui {
 class ImageDialog;
