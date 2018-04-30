@@ -113,7 +113,7 @@ void ImageDialog::updateImages()
     if (currentImage == -1 && !imageIds.isEmpty())
         currentImage = 0;
 
-    ui->imageLabel->setText(QString::number(imageIds.count()));
+    ui->imageLabel->setText(QString::number(imageIds.count())); // ???
 
     updateCurrentImage();
 }

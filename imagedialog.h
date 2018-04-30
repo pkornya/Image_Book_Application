@@ -25,6 +25,7 @@ private slots:
     void addImageClicked();
     void addTagClicked();
 
+private:
     QStringList selectedTags();
 
     void updateImages();
