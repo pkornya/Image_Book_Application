@@ -1,12 +1,14 @@
-#include <QtSql>
-
 #include "imagecollection.h"
+
+#include <QtSql>
+#include <QImageReader>
+#include <QImageWriter>
 
 ImageCollection::ImageCollection()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
-    db.setDatabaseName(":memory");
+    db.setDatabaseName("D:/Programming/SQLite/images.sqlite");
     if (!db.open())
         qFatal("Failed to open database");
 
@@ -25,7 +27,6 @@ void ImageCollection::populateDatabase()
     qry.prepare("CREATE TABLE IF NOT EXISTS tags (id INTEGER, tag VARCHAR(30))");
     if (!qry.exec())
         qFatal("Failed to create table tags");
-
 }
 
 QImage ImageCollection::getImage(int id)
