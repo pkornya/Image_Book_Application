@@ -67,7 +67,7 @@ void ImageDialog::addImageClicked()
     }
 }
 
-void ImageDialog::addTagClicked()
+void ImageDialog::addTagClicked()   // OK
 {
     bool ok;
     QString tag = QInputDialog::getText(this, tr("Image Book"), tr("Tag:"),
@@ -113,7 +113,7 @@ void ImageDialog::updateImages()
     updateCurrentImage();
 }
 
-void ImageDialog::updateTags()
+void ImageDialog::updateTags()  // OK
 {
     QStringList selection = selectedTags();
 
@@ -137,8 +137,13 @@ void ImageDialog::updateCurrentImage()
         ui->previousButton->setEnabled(false);
     }
     else {
-        ui->imageLabel->setPixmap(QPixmap::fromImage(images.getImage(imageIds[currentImage])));
-        ui->imageLabel->clear();
+        int width = ui->imageLabel->width();
+        int height = ui->imageLabel->height();
+        QImage image = images.getImage(imageIds[currentImage])
+                       .scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+        ui->imageLabel->setText("");
         ui->addTagButton->setEnabled(true);
         ui->nextButton->setEnabled(true);
         ui->previousButton->setEnabled(true);
