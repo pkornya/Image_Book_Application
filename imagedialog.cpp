@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-ImageDialog::ImageDialog(QWidget *parent) :
+ImageDialog::ImageDialog(QWidget *parent) : // OK
     QDialog(parent),
     ui(new Ui::ImageDialog)
 {
@@ -28,18 +28,13 @@ ImageDialog::ImageDialog(QWidget *parent) :
             this, SLOT(tagsChanged()));
 }
 
-ImageDialog::~ImageDialog()
-{
-    delete ui;
-}
-
-void ImageDialog::nextClicked()
+void ImageDialog::nextClicked() // OK
 {
     currentImage = (currentImage + 1) % imageIds.count();
     updateCurrentImage();
 }
 
-void ImageDialog::previousClicked()
+void ImageDialog::previousClicked() // OK
 {
     currentImage--;
     if (currentImage == -1)
@@ -48,7 +43,7 @@ void ImageDialog::previousClicked()
     updateCurrentImage();
 }
 
-void ImageDialog::tagsChanged()
+void ImageDialog::tagsChanged() // OK
 {
     updateImages();
 }
@@ -81,7 +76,7 @@ void ImageDialog::addTagClicked()
     if (ok) {
         tag = tag.toLower();
         QRegExp regExpr("[a-z]+");
-        if (regExpr.exactMatch(tag)) {
+        if (!regExpr.exactMatch(tag)) {
             QMessageBox::warning(this, tr("Image Book"),
                                  tr("This is not valid tag. "
                                  "Tags consists of lower case characters a-z."));
@@ -92,7 +87,7 @@ void ImageDialog::addTagClicked()
     }
 }
 
-QStringList ImageDialog::selectedTags()
+QStringList ImageDialog::selectedTags() // OK
 {
     QStringList result;
     foreach(QListWidgetItem *item, ui->tagList->selectedItems())
@@ -113,7 +108,7 @@ void ImageDialog::updateImages()
     if (currentImage == -1 && !imageIds.isEmpty())
         currentImage = 0;
 
-    ui->imageLabel->setText(QString::number(imageIds.count())); // ???
+    ui->label->setText(QString::number(imageIds.count()));
 
     updateCurrentImage();
 }
@@ -148,4 +143,9 @@ void ImageDialog::updateCurrentImage()
         ui->nextButton->setEnabled(true);
         ui->previousButton->setEnabled(true);
     }
+}
+
+ImageDialog::~ImageDialog() // OK
+{
+    delete ui;
 }

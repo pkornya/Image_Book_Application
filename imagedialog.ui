@@ -51,7 +51,7 @@
       <item>
        <widget class="QLabel" name="imagesLabel">
         <property name="text">
-         <string>Images</string>
+         <string>Images:</string>
         </property>
        </widget>
       </item>
